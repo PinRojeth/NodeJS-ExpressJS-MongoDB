@@ -141,7 +141,6 @@ exports.getMonthlyPlan = async (req, res) => {
   try {
     const year = req.params.year * 1;
 
-    console.log(year);
     const plan = await Tour.aggregate([
       {
         $unwind: '$startDates',
@@ -179,7 +178,9 @@ exports.getMonthlyPlan = async (req, res) => {
 
     res.status(200).json({
       status: 'success',
-      data: { plan },
+      data: {
+        plan,
+      },
     });
   } catch (err) {
     res.status(404).json({
